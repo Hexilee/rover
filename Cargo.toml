@@ -3,11 +3,28 @@ name = "rover"
 version = "0.1.0"
 authors = ["hexilee <i@hexilee.me>"]
 edition = "2018"
+publish = false
+description = "A toy web browser"
+license-file = "./LICENSE"
+readme = "./README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 
-iced = "0.3"
+iced = { version = "0.3", features = ["async-std", "debug", "glow"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 rusty_v8 = "0.23"
 webrender = { git = "https://github.com/servo/webrender" }
+async-std = "1.0"
+directories-next = "2.0"
+url = "2.2"
+
+
+[package.metadata.deb]
+assets = [
+    ["target/release/rover", "usr/bin/rover", "755"],
+    ["rover.desktop", "usr/share/applications/", "644"],
+]
+
